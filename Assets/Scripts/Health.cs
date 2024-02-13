@@ -6,19 +6,19 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {   
     float maxHealth=0;
-    [NonSerialized] public float curHealth;
+    float curHealth;
     [NonSerialized] public bool dead = false;
     // Start is called before the first frame update
 
     public void SetMaxHealth(float max) { 
         maxHealth= max;
-        dead = false;
         resetHealth();
     }
 
     void Start()
     {
-        resetHealth();
+        curHealth = maxHealth;
+        
     }
 
     public void takeDamage(float hp) {
@@ -26,14 +26,14 @@ public class Health : MonoBehaviour
         if (curHealth < 0) { 
             curHealth= 0;
         }
-    }//decrease health
+    }
 
     public void takeHealth(float hp) {
         curHealth += hp;
         if (curHealth > maxHealth) {
             curHealth = maxHealth;
         }
-    }//increase health
+    }
 
     public void resetHealth() {
         curHealth = maxHealth;
@@ -41,8 +41,9 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (curHealth == 0) { //Death Check
+        if (curHealth == 0) { 
             dead= true;
         }
+       // print(curHealth);
     }
 }
